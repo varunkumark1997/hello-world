@@ -7,7 +7,7 @@ func main() {
 
 	mux.HandleFunc("/", homepage)
 
-	http.ListenAndServe(":80", mux)
+	http.ListenAndServe(":443", mux)
 }
 
 func homepage(w http.ResponseWriter, r *http.Request) {
