@@ -36,5 +36,6 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 	ctx.fillStyle = 'white';
 	ctx.fillRect(` + strconv.Itoa(randx) + `, ` + strconv.Itoa(randy) + `, 10, 10);  
 </script>`
+	w.Header().Add("content-type", "text/html")
 	io.WriteString(w, html)
 }
