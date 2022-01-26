@@ -1,15 +1,25 @@
 package main
 
-import "net/http"
+import (
+	"io"
+	"log"
+	"net/http"
+	"os"
+)
 
 func main() {
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/", homepage)
-
-	http.ListenAndServe(":443", mux)
+	port := os.Getenv("PORT")
+	http.HandleFunc("/", homepage)
+	log.Print("Listening on :" + port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func homepage(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Hello World!</h1>"))
+
+	html := `
+<h1>Hello World!</h1>
+<div class="container">
+  <canvas id="c" width="650" height="650" style="background:#000"></canvas>
+</div>`
+	io.WriteString(w, html)
 }
